@@ -1,26 +1,9 @@
-
 <?php
-
 include("../header_inner.php");
 include("table.php");
-error_reporting(0);
-
-if($_REQUEST['a']=="error")
-{
-	echo "<script>alert('Insert Failed!!!!')</script>";
-}
-if($_REQUEST['a']=="fail")
-{
-	echo "<script>alert('Insert Failed!!!!')</script>";
-}
-if($_REQUEST['a']=="sucess" || $_REQUEST['a']==1)
-{
-	echo "<script>alert('Insert Successfully')</script>";
-}
 
 $k=0;
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
  
@@ -29,12 +12,6 @@ $k=0;
   <link rel="stylesheet" href="bootstrap.min.css">
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
-  <style>
-  .error
-  {
-	  color:#F00 !important;
-  }
-  </style>
 </head>
 <body>
 <!--<style>
@@ -57,7 +34,6 @@ $result = mysqli_query($con,"SHOW FIELDS FROM $table");
 $i = 0;
 
 echo "<div class='col-sm-12'>";
-echo "<h2>$title</h2>";
 echo "<form action='insert.php' method='post' enctype='multipart/form-data' name='register_form' id='register_form'>";
 while ($row = mysqli_fetch_array($result))
  {
@@ -69,71 +45,38 @@ while ($row = mysqli_fetch_array($result))
 $i++;
 
 $g++;
+
+
 //echo " <div ><div >";
-if($i==1  ||$name=="hash")
+
+
+if($i==1 )
 {
-	//$gender=enum("male");
+	//echo "ppp";
+
 	
-//echo"<td>Male <input type='radio' name='$name'> </td>";
+	//echo "<td>Male <input type='radio' name='$name'> </td>";
+	
 }
-
-
-
-
-
-  elseif($name=="password"  )
+ elseif($i==300 )
   {
-      
-      $rand=rand(10000,99999);
 	  echo "
 	  
 	  
-	  <div class='col-md-6'>
+	  <div class='col-md-4'>
                                             <div class='form-group'><label>
 	  
-	 AES Security Key</label><input type='text' value='$rand' name='$name'class='form-control' > </div>
-                                        </div>";
-	
-      
-    
-  }
-  
-
- elseif($i==2)
-{
-	$dateT=date("Y-m-d H:i:s");
-	echo "<input type='hidden' name='$name' value='$_SESSION[email]' class='form-control' >";
-}
- elseif($name=="date_time")
-{
-	$dateT=date("Y-m-d H:i:s");
-	echo "<input type='hidden' name='$name' value='$dateT' class='form-control' >";
-}
-elseif($name=="file_type")
-{
-	$dateT=date("Y-m-d H:i:s");
-	echo "<input type='hidden' name='$name' value='image' class='form-control' >";
-}
-
- elseif($name=="reciver" )
-  {
-	  echo "
+	  ".str_replace('_', ' ', $name)."  </label>";
 	  
 	  
-	  <div class='col-md-6'>
-                       <div class='form-group'><label>
-	  
-	  ".str_replace('_', ' ', $name)."</label>";
-	  
-	  
-	  $sql2 = "select *  from  registartion WHERE id!='$_SESSION[id]' ";
+	  $sql2 = "select *  from church_settings order by church_name asc ";
     $result2 = mysqli_query($con, $sql2) or die("Error in Selecting " . mysqli_error($connection));
-echo "<select name='$name' class='form-control'>";
-    
+echo "<select name='$name' class='form-control' required>";
+    echo "<option value=''>Select One</option>";
     while($row2 =mysqli_fetch_array($result2))
     {
 		
-		echo "<option value='$row2[email]'>$row2[email]</option>";
+		echo "<option value='$row2[id]'>$row2[church_name]  ( $row2[address] )</option>";
 	}
 	  echo "</select>";
 	    
@@ -143,60 +86,21 @@ echo "<select name='$name' class='form-control'>";
       
     
   }
-   
- elseif($i==40 )
-  {
-	
-	  $date=date("Y-m-d");
-	  
-	  $t="t".$k;
-	  echo "
-	  
-	  
-	  
-	  <div class='col-md-6'>
-                                            <div class='form-group'><label>
-	  
-	  ".str_replace('_', ' ', $name)."</label>
-	  
-	  <input type='text' name='$name'  class='form-control' value='$date' id='$t' required ></div></div>";
-	   ?>
-	  
-	    <script type="text/javascript">
-$(function() {
-	$('#t<?php echo $k;?>').datepick({
-		
-	dateFormat:"dd-mm-yyyy",
-	minDate:new Date('1980-01-01'),
-	maxDate: new Date('2000-01-01')
-		
-	}
-	
-	);
-	
-});
-
-function showDate(date) {
-	alert('The date chosen is ' + date);
-}
-</script>
-      <?php
-	  $k++;
-    
-  }
 
 else
 {
+//echo "jk";
 
   if($type_only=="varchar" || $type_only=="int" || $type_only=="int" || $type_only=="tinyint" )
   {
 	  echo "
 	  
 	  
-	  <div class='col-md-6'>
+	  <div class='col-md-4'>
                                             <div class='form-group'><label>
+											
 	  
-	  ".str_replace('_', ' ', $name)."</label><input type='text' name='$name'class='form-control' > </div>
+	  ".str_replace('_', ' ', $name)."  </label><input type='text' name='$name'class='form-control' > </div>
                                         </div>";
 	
       
@@ -211,7 +115,7 @@ else
 	  
 	  
 	  
-	  <div class='col-md-6'>
+	  <div class='col-md-4'>
                                             <div class='form-group'><label>
 	  
 	  ".str_replace('_', ' ', $name)."</label>
@@ -240,21 +144,21 @@ function showDate(date) {
 	  echo "
 	  
 	  	  
-	  <div class='col-md-6'>
+	  <div class='col-md-4'>
                                             <div class='form-group'><label>
 	  
-	  ".str_replace('_', ' ', $name)."</label>
+	  ".str_replace('_', ' ', $name)." </label>
 	  
-	  <input type='file' name='$name' class='form-control' accept='image/*'></div></div>";
+	  <input type='file' name='$name' class='form-control'></div></div>";
   }
   if($type_only=="text" )
   {
-	  echo "<div class='col-md-6'>
+	  echo "<div class='col-md-4'>
                                             <div class='form-group'><label>
 											
 											 ".str_replace('_', ' ', $name)."</label>
 											
-											<textarea name='$name'  class='form-control'  rows='8'></textarea>
+											<textarea name='$name' class='form-control'></textarea>
 											</div>
 											</div>";
   }
@@ -278,10 +182,11 @@ function showDate(date) {
 }
 
 
+
 echo "
 <div class='col-md-12'>
                               <div class='col-md-3'>              <div class='form-group'>
-											<input type='submit' value='Submit' name='submit' class='form-control btn-success'>";
+											<input type='submit' value='Add New' name='submit' class='form-control btn-success'>";
 
 
 
@@ -329,9 +234,3 @@ mysqli_close($con);
 include("../footer_inner.php");
 
 ?>
-   <div id="sample">
- <!-- <script type="text/javascript" src="nicEdit-latest.js"></script> <script type="text/javascript">
-//<![CDATA[
-        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
-  //]]>
-  </script>-->

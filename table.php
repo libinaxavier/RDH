@@ -1,5 +1,5 @@
 <?php
-$table="uploads";
+$table="registartion";
 $target_path = "uploads/";
-$title="CONFIDENTIAL DETAILS";
+$title="registartion";
 ?>

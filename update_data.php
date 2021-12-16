@@ -35,8 +35,8 @@ for($k=1;$k<$i;$k++)
 
   if($type_only=='tinytext')
   {
-
 $date=date("Y-m-d-h-i-s");
+
 $target_path = $target_path.$date.basename($_FILES[$field_name[$k]]['name']); 
 //echo "<br>tsets".basename($_FILES[$field_name[$k]]['name']);
 $path_null=move_uploaded_file($_FILES[$field_name[$k]]['tmp_name'], $target_path);
@@ -112,6 +112,6 @@ mysql_free_result($result);
 
 mysql_close();
 
-
-header("location:update.php?id=$id");
+echo"<script>window.location.replace('update.php?id=$id');</script>";
+//header("location:update.php?id=$id");
 ?>

@@ -3,21 +3,7 @@
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript">
 jQuery.validator.addMethod("notEqual", function(value, element, param) {return this.optional(element) || value != param;}, "Please enter your name");
-
-$.validator.addMethod("pwcheck",
-function(value, element) {
-   return /^[A-Za-z0-9\d=!\-@._*]+$/.test(value);
-});
-jQuery.validator.addMethod("phoneUS", function(phone_number, element) {
-    phone_number = phone_number.replace(/\s+/g, "");
-    return this.optional(element) || phone_number.length == 10  && 
-    phone_number.match(/^(\+?0-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/);
-}, "Please specify a valid phone number  ...");
-
-$(document).ready(function() {jQuery.validator.addMethod("lettersonly", function(value, element) {
-  return this.optional(element) || /^[a-z ]+$/i.test(value);
-}, "Letters only please");
-
+			$(document).ready(function() {
 			$("#register_form").validate({
 				submitHandler:function(form) 
 				{
@@ -25,71 +11,28 @@ $(document).ready(function() {jQuery.validator.addMethod("lettersonly", function
 				},
 				rules: 
 				{
-					student_name: 
+					author: 
 					{
 						required: true,
-						lettersonly: true			
+						number: true			
 					},// simple rule, converted to {required:true}
-					student_dob: 
+					location: 
 					{
 						required: true
-								
 					},
-					student_address: 
+					location_key: 
 					{
 						required: true,
-						
+					    number: true	
 					},
-					student_username:
-					{
-						required: true
-						
-						
-					},
-					user_password:
-					{
-						required: true
-									
-					},
-					student_email:
+					emp_phno: 
 					{
 						required: true,
-						email:true		
+					    number: true	
 					},
-					student_mob:
+					remark: 
 					{
-						required: true
-					},
-					batch:
-					{
-						required: true
-					},
-					brach_name: 
-					{
-						required: true
-						
-						
-							
-					},
-					studet_geder: 
-					{
-						required: true
-					    
-					},
-					username: 
-					{
-						required: true
-					},
-					password: 
-					{
-						required: true,
-						
-						
-					},
-					password2: 
-					{
-						required: true,
-						equalTo:'#password1'
+						required: true	
 					},
 					comment: 
 					{
@@ -98,12 +41,12 @@ $(document).ready(function() {jQuery.validator.addMethod("lettersonly", function
 					},
 					messages: 
 					{
-						comment: "Please enter a comment.",
-						password2: "Password Doesn't Matched"
+						comment: "Please enter a comment."
 					}
 			});	
 		});	
 </script>
+
 <link type="text/css" href="jquery.datepick.css" rel="stylesheet">
 <script type="text/javascript" src="jquery.datepick.js"></script>
 <script type="text/javascript">

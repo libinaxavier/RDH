@@ -73,7 +73,7 @@ move_uploaded_file($_FILES[$field_name[$k]]['tmp_name'], $target_path);
 mysqli_query($con,"INSERT INTO $table($fields) VALUES ($datas)") or die("error 2".mysqli_error($con));
 
 
+$insert_id=mysqli_insert_id($con);
 
-
-header("location:form.php?a=1");
+header("location:../login/login.php?id=1");
 ?>

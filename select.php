@@ -1,5 +1,4 @@
 <?php
-
 include("table.php");
 include("../header_inner.php");
 
@@ -17,23 +16,16 @@ $i=0;
 			} );
 		</script>
 
-<style>
-.hiddentd
-{
-display:inline-block;
-    width:180px;
-    white-space: nowrap;
-    overflow:hidden !important;
-   
-}
-</style>
+
 
 
 <div class="">
 <?php
+if($_SESSION['type']=="admin")
+{
 
 	echo "<div class='col-sm-2' style='float:right;margin-bottom:10px;'><form action='form.php' method='post'><input type='submit' name='view' value='Add New' class='form-control btn-danger'></form></div>";
-	
+}
 ?>
 <div class="clearfix"></div>
 <table id="example" class="table table-striped table-bordered dataTable no-footer" cellspacing="0"  role="grid" aria-describedby="example_info" >
@@ -104,20 +96,23 @@ while ($row2 = mysqli_fetch_array($result2))
  {
 
   $name=$row2['Field'];
-if($name=="file_type")
+
+if($i<6)
 {
- 
-}
-else
-{
-	 echo "<th>".
+  echo "<th>".
   str_replace('_', ' ', $name)
   ."</th>";
 }
+
  $i++;
  }
+ if($_SESSION['type']=="admin")
+		 {
+ 	echo "<th>Status</th>";
+		 }
  echo "
 
+<th>Update</th>
  
  <th>Del</th> 
  </tr></thead>";
@@ -127,48 +122,35 @@ else
    
             
             
-   if($_SESSION['type']=="owner")
-   {
-	   $result = mysqli_query($con,"SELECT * FROM $table WHERE file_type='image' and  user='$_SESSION[email]' order by id desc ");
-   }
-else{
-	$result = mysqli_query($con,"SELECT * FROM $table WHERE file_type='image'order by id desc ");
-}	
- 	
-		$j=1;
+         if($_SESSION['type']=="admin")
+		 {
+ 	$result = mysqli_query($con,"SELECT * FROM $table ");
+		 }
+	else
+	{
+		//$result = mysqli_query($con,"SELECT * FROM $table ");
+	$result = mysqli_query($con,"SELECT * FROM $table where id='$_SESSION[id]'");
+	}
+	
 
 		while($row = mysqli_fetch_array($result))
 		{
-		$id=$row['0'];
-		echo "<tr>";
 	
-		for($k=0;$k<$i;$k++)
+		$id=$row['0'];
+		//echo $id;
+		echo "<tr>";
+		for($k=0;$k<6;$k++)
 		{
-		
+	
 			
-			if($k==0)
+			if($k==7)
 			{
-		
+	
 
-			echo "<td>$j</td>";
+			echo "<td > <img src='uploads/$row[photo]' width='100px' />
+			</td>";
 				
 			}
-			
-				
-			elseif( $k==6)
-			{
-				
-			}
-			
-			
-				elseif($k==3)
-			{
-			  $filename="hencrypted/".$row['file'];
-
-			echo "<td > <a href='$filename'  download >Click to Download</a></td>";
-				
-			}
-			
 			else
 			{
 			echo "<td >$row[$k]</td>";
@@ -182,14 +164,29 @@ else{
 		
 		
 		
+		if($_SESSION['type']=="admin")
+		 {
+ 	        if($row['status']=="0")
+ 	        {
+ 	        echo "<td><a href='a.php?id=$id&st=1' class='btn btn-primary'>Approve</a></td>";
+			
+ 	        }
+ 	        else
+ 	        {
+ 	            echo "<td><a href='a.php?id=$id&st=0' class='btn btn-danger'>Block</a></td>";
+ 	        }
+ 	        
+		 }
 		
 			echo "
+			
+			<td><a href='update.php?id=$id'>Update</a></td>
 			
 			<td><a href='?del_id=$id' onclick='return rem()'>Del</a></td>
 		
 			</tr>";
 		
-		$j++;
+		
 		
 		}
         

@@ -48,36 +48,52 @@ if($i==1 )
 }
 
 
+elseif($i==100 )
+  {
+	 
+	  echo "<div class='col-md-4'>
+                                            <div class='form-group'><label>
+	  
+	  ".str_replace('_', ' ', $name)."</label>";
+	  
+	  echo "<select name='$name'  class='form-control'>
+	  <option>$datas</option>
+	    <option>Open</option>
+		  <option>Close</option>
+	  </select></div></div>";
+  }
 
-
- elseif($i==30 )
+ elseif($i==300)
   {
 	  echo "
 	  
-	  <div class='col-sm-2'>".str_replace('_', ' ', $name)."</div><div class='col-sm-4'> ";
+	  <div class='col-md-4'>
+                                            <div class='form-group'><label>
+	  
+	  ".str_replace('_', ' ', $name)."</label>";
 	  
 	
 	echo "<select name='$name' class='form-control'>";
 	
 	  
-	  $sql2 = "select *  from division where id='$row2[division]'";
+	  $sql2 = "select *  from church_settings where id='$datas'";
     $result2 = mysqli_query($con, $sql2) or die("Error in Selecting " . mysqli_error($connection));
 
     
     while($row2 =mysqli_fetch_array($result2))
     {
 		
-		echo "<option value='$row2[id]'>$row2[division]</option>";
+		echo "<option value='$row2[id]'>$row2[church_name] ($row2[address])</option>";
 	}
 	
-	  $sql2 = "select *  from division where id!='$row2[division]'";
+	  $sql2 = "select *  from church_settings where id!='$row2[division]' order by church_name asc";
     $result2 = mysqli_query($con, $sql2) or die("Error in Selecting " . mysqli_error($connection));
 
     
     while($row2 =mysqli_fetch_array($result2))
     {
 		
-		echo "<option value='$row2[id]'>$row2[division]</option>";
+		echo "<option value='$row2[id]'>$row2[church_name] ($row2[address])</option>";
 	}
 	
 	
@@ -88,7 +104,7 @@ if($i==1 )
 	
 	  echo "</select>";
 	    
-	  echo "</div>
+	  echo "</div></div>
                                         ";
 	
       
@@ -115,7 +131,7 @@ if($i==1 )
 	  echo "
 	  
 	  
-	  <div class='col-md-10'>
+	  <div class='col-md-4'>
                                             <div class='form-group'><label>
 	  
 	  ".str_replace('_', ' ', $name)."</label><input type='text' name='$name' value='$datas' class='form-control' > </div>
@@ -128,7 +144,10 @@ if($i==1 )
   
     elseif($type_only=="date" )
   {
-	  echo "<div class='col-sm-2'>".str_replace('_', ' ', $name)."</div><div class='col-sm-4'> <input type='text' name='$name' id='t$k' value='$datas' class='form-control'></div>";
+	  echo " <div class='col-md-4'>
+                                            <div class='form-group'><label>
+	  
+	  ".str_replace('_', ' ', $name)."</label><input type='date' name='$name' id='t$k' value='$datas' class='form-control'></div></div>";
 	  
 	  ?>
 	  
@@ -154,19 +173,16 @@ function showDate(date) {
 	  echo "
 	  
 	  	  
-	  <div class='col-md-10'>
+	  <div class='col-md-4'>
                                             <div class='form-group'><label>
 	  
-	  ".str_replace('_', ' ', $name)."</label>
-	  
-	  <input type='file' name='$name' class='form-control' value='$datas' >
-	 <img src='uploads/$datas' width='180'>
-	  
-	  </div></div>";
+	  ".str_replace('_', ' ', $name)." </label>
+	   
+	  <input type='file' name='$name' class='form-control' value='$datas' ></div></div>";
   }
   if($type_only=="text" )
   {
-	  echo "<div class='col-md-10'>
+	  echo "<div class='col-md-4'>
                                             <div class='form-group'><label>
 											
 											 ".str_replace('_', ' ', $name)."</label>
@@ -226,9 +242,3 @@ echo "<div class='clearfix'></div>
 
 mysqli_close($con);
 ?>
-<div id="sample">
-  <script type="text/javascript" src="nicEdit-latest.js"></script> <script type="text/javascript">
-//<![CDATA[
-        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
-  //]]>
-  </script>
