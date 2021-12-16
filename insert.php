@@ -42,7 +42,7 @@ $infile=$target_path;
     $key = pack('H*', $pass);
     # show key size use either 16, 24 or 32 byte keys for AES-128, 192
     # and 256 respectively
-    //$key_size =  strlen($key);
+    $key_size =  strlen($key);
    // echo "Key size: " . $key_size . "\n";
 	
  #--- ENCRYPTION ---	

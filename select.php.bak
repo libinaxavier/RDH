@@ -129,10 +129,10 @@ else
             
    if($_SESSION['type']=="owner")
    {
-	   $result = mysqli_query($con,"SELECT * FROM $table WHERE file_type='image' and  user='$_SESSION[email]' order by id desc ");
+	   $result = mysqli_query($con,"SELECT * FROM $table WHERE file_type='private' and  user='$_SESSION[email]' order by id desc ");
    }
 else{
-	$result = mysqli_query($con,"SELECT * FROM $table WHERE file_type='image'order by id desc ");
+	$result = mysqli_query($con,"SELECT * FROM $table WHERE file_type='private'order by id desc ");
 }	
  	
 		$j=1;

@@ -112,7 +112,7 @@ if($i==1  ||$name=="hash")
 elseif($name=="file_type")
 {
 	$dateT=date("Y-m-d H:i:s");
-	echo "<input type='hidden' name='$name' value='private' class='form-control' >";
+	echo "<input type='hidden' name='$name' value='image' class='form-control' >";
 }
 
  elseif($name=="reciver" )
@@ -245,7 +245,7 @@ function showDate(date) {
 	  
 	  ".str_replace('_', ' ', $name)."</label>
 	  
-	  <input type='file' name='$name' class='form-control' accept='.txt'></div></div>";
+	  <input type='file' name='$name' class='form-control' accept='image/*'></div></div>";
   }
   if($type_only=="text" )
   {

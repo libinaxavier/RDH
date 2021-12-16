@@ -90,12 +90,12 @@ $message = desteganize($secretfile);
     
 
 
-$myFile = "decrypted/uploads/output.txt";
+$myFile = "decrypted/uploads/output.PNG";
 	$fh = fopen($myFile, 'w') or die("can't open file");
 	fwrite($fh, $plaintext_dec );
     fclose($fh);
 
 echo"<h2>OUTPUT FILE</h2><br>";
-echo"<br><a href='$myFile' target='_blank' >click to view file</a>";
+echo"<br><br><a href='$myFile' target='_blank' >Click to view image</a>";
 
 ?>
